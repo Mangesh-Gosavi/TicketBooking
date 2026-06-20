@@ -31,9 +31,11 @@ const Navbar = () => {
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-4 text-sm sm:flex">
+        {user?.name && (
           <span className="hidden text-slate-500 sm:inline">
             Hi, <span className="font-semibold text-slate-700">{user?.name}</span>
           </span>
+          )}
           <Link to="/" className="font-medium text-slate-600 hover:text-indigo-600">
             Events
           </Link>
