@@ -164,9 +164,11 @@ const EventDetails = () => {
       </div>
 
       <div className="grid gap-8 lg:grid-cols-3">
-        {/* Seat grid */}
-        <div className="lg:col-span-2">
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        {/* Seat grid — min-w-0 lets this grid column shrink below the seat
+            grid's intrinsic width so the horizontal scroll stays contained
+            inside the card instead of overflowing the whole page. */}
+        <div className="min-w-0 lg:col-span-2">
+          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-900">Select your seats</h2>
             <SeatGrid
               seats={seats}

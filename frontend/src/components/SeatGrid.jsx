@@ -22,27 +22,40 @@ const SeatGrid = ({ seats, selectedSeats, onToggle }) => {
 
   return (
     <div className="space-y-6">
-      {/* Stage indicator */}
-      <div className="mx-auto w-full max-w-lg rounded-lg bg-slate-800 py-2 text-center text-xs font-semibold uppercase tracking-widest text-slate-200">
-        Stage / Screen
-      </div>
-
-      <div className="space-y-2">
-        {rowKeys.map((row) => (
-          <div key={row} className="flex items-center gap-28">
-            <span className="w-5 text-sm font-bold text-slate-400">{row}</span>
-            <div className="flex flex-wrap gap-2">
-              {rows[row].map((seat) => (
-                <Seat
-                  key={seat._id || seat.seatNumber}
-                  seat={seat}
-                  isSelected={selectedSeats.includes(seat.seatNumber)}
-                  onToggle={onToggle}
-                />
-              ))}
+      {/* Horizontal scroll wrapper: keeps rows on a single line and lets the
+          grid scroll sideways instead of wrapping on narrow screens. */}
+      <div className="overflow-x-auto pb-2">
+        {/* w-max keeps fixed seat sizes (never shrinks); mx-auto centers the
+            grid so it looks identical at every screen width, and the parent
+            scrolls horizontally only when the viewport is too narrow. */}
+        <div className="mx-auto w-max space-y-6">
+          {/* Stage indicator — mirrors a seat row (spacer matching the row
+              label) so it starts at the seats, not at the row letters. */}
+          <div className="flex items-center gap-6">
+            <span className="w-5 shrink-0" aria-hidden="true" />
+            <div className="flex-1 rounded-lg bg-slate-800 py-2 text-center text-xs font-semibold uppercase tracking-widest text-slate-200">
+              Stage / Screen
             </div>
           </div>
-        ))}
+
+          <div className="space-y-2">
+            {rowKeys.map((row) => (
+              <div key={row} className="flex items-center gap-6">
+                <span className="w-5 shrink-0 text-sm font-bold text-slate-400">{row}</span>
+                <div className="flex gap-2">
+                  {rows[row].map((seat) => (
+                    <Seat
+                      key={seat._id || seat.seatNumber}
+                      seat={seat}
+                      isSelected={selectedSeats.includes(seat.seatNumber)}
+                      onToggle={onToggle}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Legend */}

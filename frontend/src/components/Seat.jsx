@@ -20,7 +20,7 @@ const Seat = ({ seat, isSelected, onToggle }) => {
       disabled={!isClickable}
       onClick={() => isClickable && onToggle(seat.seatNumber)}
       title={`${seat.seatNumber} — ${seat.status}`}
-      className={`flex h-9 w-9 items-center justify-center rounded-md text-xs font-semibold shadow-sm transition disabled:opacity-90 ${STATUS_STYLES[visualStatus]}`}
+      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-xs font-semibold shadow-sm transition disabled:opacity-90 ${STATUS_STYLES[visualStatus]}`}
     >
       {seat.seatNumber}
     </button>
